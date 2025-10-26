@@ -4,18 +4,26 @@ import UlList from "../Components/ULlist";
 const CheckList = () => {
   const [inputValue, setInputValue] = useState("");
   const [task, setTask] = useState([]);
+
   const handleInputChange = (value) => {
+
     setInputValue(value);
   };
   const handleClick = (event) => {
+
     event.preventDefault();
 
-    if (!inputValue.includes(inputValue)) return;
+    // if (!inputValue.includes(inputValue)) return;
+    if (inputValue === "") return;
 
     setTask([...task, inputValue]);
 
     setInputValue("");
   };
+  const removeTask =(i)=>{
+    const updatedTaske = task.filter((_,index)=> index !== i)
+    setTask(updatedTaske)
+  }
   return (
     <>
       <div className="text-center items-center m-auto  bg-blue-200 w-1/2 justify-center ">
@@ -37,7 +45,7 @@ const CheckList = () => {
             </button>
           </div>
         </form>
-        <UlList tasks={task}></UlList>
+        <UlList tasks={task} onDelete={removeTask}></UlList>
       </div>
     </>
   );
